@@ -60,7 +60,7 @@ func main(){
     if err != nil {
       log.Printf("something went wrong with the download: %s", err)
     } else {
-      resp.Body.Close()
+      defer resp.Body.Close()
       _, err := io.Copy(out, resp.Body)
       if err != nil { log.Println(err) }
     }
