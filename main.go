@@ -58,12 +58,12 @@ func main(){
     log.Println("downloading ", url)
     resp, err := client.Get(url)
     if err != nil {
-      log.Fatal(err)
+      log.Printf("something went wrong with the download: %s", err)
     } else {
+      resp.Body.Close()
       _, err := io.Copy(out, resp.Body)
-      if err != nil { log.Fatal(err) }
+      if err != nil { log.Println(err) }
     }
-    resp.Body.Close()
   }
 
 }
